@@ -21,8 +21,13 @@ function check_accounts {
 	for i in "${to_check[@]}"
 	do
 		echo $i >> $output_file
+		echo "Accounts:" >> $output_file
 		curl -G https://haveibeenpwned.com/api/v2/breachedaccount/$i >> $output_file
-		echo "" >> $output_file
+		echo "
+Pastes:" >> $output_file
+		curl -G https://haveibeenpwned.com/api/v2/pasteaccount/$i >> $output_file
+		echo "
+" >> $output_file
 	done
 }
 
